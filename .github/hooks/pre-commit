@@ -1,0 +1,2 @@
+#!/bin/sh
+gitleaks detect --source . -v --no-color --max-target-megabytes 5
