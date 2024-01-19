@@ -27,7 +27,13 @@ damage that may ensue.
   * [TCP/IP Configuration](#tcpip-configuration)
   * [Worldgroup Manager Packaging Utility](#worldgroup-manager-packaging-utility)
 * [MajorMUD Installation](#majormud-installation)
+  * [Hex Edits](#hex-edits)
+  * [Newhaven & Silvermere Signs](#newhaven--silvermere-signs)
 * [Configuration](#configuration)
+  * [Menu Editor](#menu-editor)
+  * [Security & Accounting](#security--accounting)
+  * [Disable Modules](#disable-modules)
+  * [General Setup](#general-setup)
 * [Attribution](#attribution)
 
 ## Introduction
@@ -191,11 +197,139 @@ Congratulations! Worldgroup is now installed.
 
 ## MajorMUD Installation
 
-Coming soon.
+```
+📌NOTE
+Given that the MajorMUD installation is based on a 16-bit version of InstallShield an alternate
+method of installation will be used.
+```
+
+Copy or extract the installation folder onto your hard drive and open the folder in explorer. Right-click on the white-space in the folder and choose `Open in Terminal`.
+
+![Guide-18](.github/media/guide-18.png)
+
+To decompress all files (including sub directories) from `WCCMMUD.Z` to `C:\WGSERV` execute `.\ICOMP.EXE WCCMMUD.Z C:\WGSERV\*.* -d -i`.
+
+![Guide-19](.github/media/guide-19.png)
+
+Once extraction is complete, use `exit` to close the terminal.
+
+![Guide-20](.github/media/guide-20.png)
+
+Head into the `C:\WGSERV` folder and extract all of the following into the same folder:
+
+`WCCHSE.ZIP` `WCCEMB.ZIP` `WCCBAN.ZIP` `WCCSTA.ZIP` `WCCSTO.ZIP`
+
+### Hex Edits
+
+If are planning on applying any of the [hex edits](https://github.com/kyaulabs/majormud/wiki/Hex-Edits-&-Tweaks) available, now would be a good time.
+
+### Newhaven & Silvermere Signs
+
+If you would like to customize the text on the signs at the center of town, use the files `NEWHAVEN.TXT` and `SILVRMRE.TXT`. These files will need to be created as they do not exist by default in the `C:\WGSERV` folder.
 
 ## Configuration
 
-Coming soon.
+### Menu Editor
+
+Launch the Worldgroup Menu Editor via `C:\WGSERV\wgsrunmt.EXE` (you may also want to make a shortcut on your Start Menu). You will likely see a message about extracting the rest of the custom descriptions for MajorMUD. Since will fail anyway due to the unzip executable that is included being 16-bit just press any key.
+
+```
+📌NOTE
+We will take note of these ZIP files for later extraction
+```
+
+![Guide-21](.github/media/guide-21.png)
+
+The menu editor will look a bit janky using the newer console in Windows 11. This can be remedied by clicking on the icon in the top left of the window and selecting `Properties`. Make sure `Use legacy console (requires relaunch, affects all consoles)` is checked at the bottom them click on `OK`. Once back in the Menu Editor press `<ESC>` to close out of it so you can relaunch it.
+
+![Guide-22](.github/media/guide-22.png)
+
+Upon relaunch the editor should function properly, with the `TOP` menu page selected press `<F2>` to edit it. Scroll down below the 11th menu option and add another option by pressing `G`. Give it a short description of `Games` and destination page of `GAMES` then press `<ENTER>` on `Yes` at the bottom to save your changes and return to the menu.
+
+![Guide-23](.github/media/guide-23.png)
+
+Scroll all the way down to the bottom of the Edit Menu window and select `Return to Menu Tree?` make sure it says `Yes` and press `<ENTER>`.
+
+Back at the main screen, scroll down to find your new `GAMES` entry then press `<F2>` to open edit.
+
+![Guide-24](.github/media/guide-24.png)
+
+Press `<ENTER>` to confirm this is a `Menu Page`. Scroll down and set the `Page Title` to `Games`.
+
+With the games menu created now scroll down to the first option available to the menu. Add an entry by pressing `M` (we will use M for MajorMUD). Give it a short description of `MajorMUD` and destination page of `MAJORMUD` then press `<ENTER>` on `Yes` at the bottom to save your changes and return to the menu.
+
+![Guide-25](.github/media/guide-25.png)
+
+Scroll all the way down to the bottom of the Edit Menu window and select `Return to Menu Tree?` make sure it says `Yes` and press `<ENTER>`.
+
+Back at the main screen, press the right arrow on the `GAMES` entry to get to the `MAJORMUD` entry then press `<F2>` to open edit.
+
+This time select `Module Page` and press `<ENTER>`. Scroll down to the `Module Name` which will open a list of modules to choose from, select MajorMUD. Finally navigate down to `Return to Menu Tree?` and choose `Yes` and press `<ENTER>`.
+
+![Guide-26](.github/media/guide-26.png)
+
+Once back at the Menu Tree press `<F10>` to save and exit.
+
+### Security & Accounting
+
+First start by launching the `KEYGEN.EXE` that goes with MajorMUD and select option `1` to generate the MajorMUD code. It will first ask how many users you would like the code to be for, make sure this is `256`. Then it will prompt you for your BBS registration number, this is the same one generated in the very first step of the Worldgroup installation.
+
+Press `2` to generate a MajorMUD Plus code, confirming your same reg#.
+
+Finally select option `4` to auto generate all module codes at once, again confirming your reg#.
+
+```
+📌NOTE
+Write down the MajorMUD and MajorMUD Plus codes, the module ones will be put into a file in the
+directory with the key generator.
+```
+
+![Guide-27](.github/media/guide-27.png)
+
+Move the `wccmdact.ini` that the keygen created into the `C:\WGSERV` folder.
+
+Launch `Security & Accounting` and scroll down to the MajorMUD section and enter in your activation codes for MajorMUD and MajorMUD Plus.
+
+![Guide-28](.github/media/guide-28.png)
+
+Also make the following changes to the `MajorMUD` section, this will get MajorMUD working for all users without requiring you to manage user groups and keys via the BBS.
+
+| Name | Value |
+|:---- |:----- |
+| `SAVEKEY` | DEMO |
+| `NODMOKEY` | DEMO |
+| `NOPAYKEY` | DEMO |
+
+Click the `Save` button and then exit.
+
+![Guide-29](.github/media/guide-29.png)
+
+### Disable Modules
+
+Launch the `Offline Utilities` and select `WGSDMOD` to disable/enable modules then click `Run`.
+
+![Guide-30](.github/media/guide-30.png)
+
+Below on the left is a list of all of the required modules to run a minimal BBS that supports MajorMUD alone, to the right is a list of optional modules that can enhance your BBS but are not required. All other modules should be disabled for security purposes.
+
+| Required | Required | Optional |
+|:-------- |:-------- |:-------- |
+| Account Display/Edit | MajorMUD | File Libraries |
+| Data Entry Service | MajorMUD Plus | Invisibility Monitor |
+| Editor | Message Center | Logon Notices |
+| Electronic Mail | Offline Cleanup & Events | |
+| File Transfer Service | Registry of Users | |
+| Finger Server | Remote Sysop Menu | |
+| Formatted Text Handler | TCP/IP for Worldgroup | |
+| Forums | Telnet Server | |
+| Gcomm Messaging Engine | Text Variables | |
+| Logoff (end session) | The English/RIP language | |
+| Main Executive | | |
+When finished, use `<ALT>+<X>` to exit. Back at the Offline Utilities click `Exit`.
+
+![Guide-31](.github/media/guide-31.png)
+
+### General Setup
 
 ## Attribution
 
